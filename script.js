@@ -1,6 +1,5 @@
 var canvas = document.getElementById("snake");
 var ctx = canvas.getContext("2d");
-//console.log(canvas);
 
 const grid = 32;
 let snake = [];
@@ -28,7 +27,16 @@ document.addEventListener("keydown", (e) => {
     console.log(d);
 });
 
-setInterval(() => {
+function collision(array, head) {
+    for(var i=0; i<array.length; i++) {
+        if(head.x == array[i].x && head.y == array[i].y){
+            return true;
+        }
+    }
+    return false;
+}
+
+function draw() {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, 608, 544);
     ctx.fillStyle = "gray";
@@ -54,9 +62,9 @@ setInterval(() => {
     if (d === "left") headX -= grid;
     if (d == "up") headY -= grid;
     if (d == "right") headX += grid;
-    if (d == "down") headY += grid;     
-    
-    if(headX == food.x && headY == food.y) {
+    if (d == "down") headY += grid;
+
+    if (headX == food.x && headY == food.y) {
         food = {
             x: Math.floor(Math.random() * 17 + 1) * grid,
             y: Math.floor(Math.random() * 15 + 1) * grid
@@ -65,8 +73,15 @@ setInterval(() => {
     else
         snake.pop();
     let newPos = {
-        x : headX,
-        y : headY
+        x: headX,
+        y: headY
     }
+
+    if(headX < grid || headX > 17 * grid || headY < grid || headY > 15 * grid || collision(snake, newPos)) {
+        clearInterval(game);
+    }
+
     snake.unshift(newPos);
-}, 100);
+}
+
+var game = setInterval(draw, 100);
