@@ -1,3 +1,35 @@
+.container{
+    display: flex;
+}
+
+.game{
+    flex: 2;
+}
+
+.sidebar{
+    flex: 1;
+    text-align: center;
+}
+
+.score{
+    font-size: 300%;
+    border: 2px solid black;
+    padding: 20px 60px;
+}
+
+.heading {
+    margin: 20px 60px 40px 60px;
+    font-size: 200%;
+    border-bottom: 2px solid black;
+}
+
+button {
+    margin: 20px;
+    width: 170px;
+    font-size: 125%;
+    height: 40px;
+}
+
 canvas{
     display: block;
     margin: 0 auto;
