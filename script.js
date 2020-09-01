@@ -2,6 +2,9 @@ var canvas = document.getElementById("snake");
 var ctx = canvas.getContext("2d");
 var displayScore = document.querySelector(".score");
 var resetButton = document.querySelector(".reset");
+var easyButton = document.querySelector(".easy");
+var medButton = document.querySelector(".medium");
+var hardButton = document.querySelector(".hard");
 
 const foodImg = new Image();
 foodImg.src = "food.png";
@@ -11,6 +14,7 @@ var score;
 let snake;
 let food;
 let d;
+let t = 100;
 var game;
 
 document.addEventListener("keydown", (e) => {
@@ -23,17 +27,40 @@ document.addEventListener("keydown", (e) => {
 
 
 resetButton.addEventListener("click", () => {
-    newGame();
+    newGame(t);
 })
 
-function newGame() {
+easyButton.addEventListener("click", () => {
+    removeSelected();
+    easyButton.classList.add("selected");
+    t = 125;
+    newGame(t);
+})
+
+medButton.addEventListener("click", () => {
+    removeSelected();
+    medButton.classList.add("selected");
+    t = 100;
+    newGame(t);
+})
+
+hardButton.addEventListener("click", () => {
+    removeSelected();
+    hardButton.classList.add("selected");
+    t = 75;
+    newGame(t);
+})
+
+function newGame(param) {
     newFood();
     newSnake();
     d = null;
     score = 0;
-    game = setInterval(draw, 100);
+    displayScore.innerHTML = score;
+    console.log(param);
+    game = setInterval(draw, param);
 }
-newGame();
+newGame(t);
 
 function newSnake() {
     snake = [];
@@ -78,7 +105,7 @@ function draw() {
     else {
         snake.pop();
     }
-    
+
     let newPos = {
         x: headX,
         y: headY
@@ -112,4 +139,10 @@ function drawSnake() {
         }
         ctx.fillRect(snake[i].x, snake[i].y, grid, grid);
     }
+}
+
+function removeSelected() {
+    easyButton.classList.remove("selected");
+    medButton.classList.remove("selected");
+    hardButton.classList.remove("selected");
 }

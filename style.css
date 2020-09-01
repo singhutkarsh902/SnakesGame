@@ -9,6 +9,7 @@
 .sidebar{
     flex: 1;
     text-align: center;
+    margin: 0;
 }
 
 .score{
@@ -24,10 +25,15 @@
 }
 
 button {
-    margin: 20px;
+    margin: 20px 20px 0px 20px ;
     width: 170px;
     font-size: 125%;
-    height: 40px;
+    height: 35px;
+}
+
+.selected {
+    border: 2px solid black;
+    color: red;
 }
 
 canvas{
