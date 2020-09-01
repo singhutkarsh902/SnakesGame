@@ -58,6 +58,7 @@ function newGame(param) {
     score = 0;
     displayScore.innerHTML = score;
     console.log(param);
+    clearInterval(game);
     game = setInterval(draw, param);
 }
 newGame(t);
